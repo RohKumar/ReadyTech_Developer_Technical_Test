@@ -5,7 +5,8 @@ namespace Service
 {
 	public interface ICoffeeMachineService
 	{
-		BrewCoffeeResponse GetBrewCoffee();
+		object GetBrewCoffee();
+		double GetCurrentTempreture(string lat, string lon);
 	}
 }
 

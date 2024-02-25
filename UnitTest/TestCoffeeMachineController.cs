@@ -3,6 +3,8 @@ using Moq;
 using ReadyTechDeveloperTechnicalTest.Controllers;
 using Service;
 using Microsoft.AspNetCore.Http;
+using Service.WebApi;
+using BusinessEntities;
 
 namespace UnitTest;
 
@@ -12,11 +14,14 @@ namespace UnitTest;
 public class TestCoffeeMachineController
 {
     private Mock<ICoffeeMachineService> _mockCoffeeMachineService;
+    
 
     [SetUp]
     public void Setup()
     {
+       
         _mockCoffeeMachineService = new Mock<ICoffeeMachineService>();
+       
     }
 
     /// <summary>
@@ -61,4 +66,5 @@ public class TestCoffeeMachineController
 
         Assert.Throws<Exception>(() => coffeeMachineController.GetBrewCoffee(DateTime.Now));
     }
+    
 }

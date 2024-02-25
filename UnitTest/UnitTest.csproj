@@ -24,4 +24,10 @@
     <ProjectReference Include="..\ReadyTechDeveloperTechnicalTest\ReadyTechDeveloperTechnicalTest.csproj" />
     <ProjectReference Include="..\BusinessEntities\BusinessEntities.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="WeatherData\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="WeatherData\" />
+  </ItemGroup>
 </Project>

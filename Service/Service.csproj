@@ -9,4 +9,10 @@
   <ItemGroup>
     <ProjectReference Include="..\BusinessEntities\BusinessEntities.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="WebApi\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="WebApi\" />
+  </ItemGroup>
 </Project>
