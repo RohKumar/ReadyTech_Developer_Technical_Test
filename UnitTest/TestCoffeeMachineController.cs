@@ -3,6 +3,7 @@ using Moq;
 using ReadyTechDeveloperTechnicalTest.Controllers;
 using Service;
 using Microsoft.AspNetCore.Http;
+using BusinessEntities;
 
 namespace UnitTest;
 
@@ -25,6 +26,8 @@ public class TestCoffeeMachineController
     [Test]
     public void TestCoffeeMachineController_GetBrewCoffee_ReturnOK_Successfully()
     {
+        _mockCoffeeMachineService.Setup(x => x.GetBrewCoffee()).Returns(new BrewCoffeeResponse());
+
         CoffeeMachineController coffeeMachineController = new CoffeeMachineController(_mockCoffeeMachineService.Object);
 
         OkObjectResult result = (OkObjectResult)coffeeMachineController.GetBrewCoffee(DateTime.Now);
@@ -45,7 +48,7 @@ public class TestCoffeeMachineController
         ObjectResult result = (ObjectResult)coffeeMachineController.GetBrewCoffee(new DateTime(2024,04,01));
 
         Assert.IsNotNull(result);
-        Assert.DoesNotThrow(() => coffeeMachineController.GetBrewCoffee(DateTime.Now));
+        Assert.DoesNotThrow(() => coffeeMachineController.GetBrewCoffee(new DateTime(2024, 04, 01)));
         Assert.That(result.StatusCode, Is.EqualTo(StatusCodes.Status418ImATeapot));
     }
 
