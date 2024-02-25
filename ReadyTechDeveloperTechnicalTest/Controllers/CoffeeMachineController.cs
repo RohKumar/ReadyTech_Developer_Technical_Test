@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using BusinessEntities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Primitives;
 using Service;
 
 
@@ -33,11 +35,28 @@ namespace ReadyTechDeveloperTechnicalTest.Controllers
         [Route("brew-coffee/{today?}")]
         public IActionResult GetBrewCoffee(DateTime? today)
         {
-            if (CommonService.IsFirstApril(today)) {
+            if (CommonService.IsFirstApril(today))
+            {
                 return StatusCode(StatusCodes.Status418ImATeapot, $"{StatusCodes.Status418ImATeapot} {ReasonPhrases.GetReasonPhrase(StatusCodes.Status418ImATeapot)}");
             }
             else
-                return Ok(_coffeeMachineService.GetBrewCoffee());
+            {
+                StringBuilder responseFormat = new StringBuilder();
+                responseFormat.Append("{");
+                responseFormat.Append("\r\n");
+                responseFormat.Append("“message”: “");
+                responseFormat.Append(_coffeeMachineService.GetBrewCoffee().Message);
+                responseFormat.Append("\"");
+                responseFormat.Append(",");
+                responseFormat.Append("\r\n");
+                responseFormat.Append("“prepared”: “");
+                responseFormat.Append(_coffeeMachineService.GetBrewCoffee().Prepared);
+                responseFormat.Append("\"");
+                responseFormat.Append("\r\n");
+                responseFormat.Append("}");
+                return Ok(responseFormat.ToString());
+            }
+               
         }
     }
 }
